@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Flyaway</title>
 <style type="text/css">
 body {
 	font-family: Arial, Helvetica, sans-serif;

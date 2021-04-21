@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Flyaway</title>
 <style type="text/css">
 .card {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

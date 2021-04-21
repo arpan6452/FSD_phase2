@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Flyaway</title>
 <%@ page import="flyaway.model.User"%>
 <style type="text/css">
 .topNavSecton {

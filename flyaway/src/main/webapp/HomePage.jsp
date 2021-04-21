@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Flyaway</title>
 <style type="text/css">
 body {
 	background-image: url("./images/flyaway.jpg");
@@ -18,9 +18,9 @@ body {
 }
 
 .logo {
-	margin-left: 2%;
+	margin-left: 40%;
 	margin-top: 3%;
-	color: #dddddd;
+	color: #fff;
 }
 
 .serachFlightSection {
@@ -122,7 +122,7 @@ body {
 <jsp:include page="TopNav.jsp" />
 <br>
 	<h2 class="logo">
-		<img src="./images/flightImg.png" alt="Avatar" class="avatar">
+		<!-- <img src="./images/flightImg.png" alt="Avatar" class="avatar"> -->
 		Welcome to Flyaway
 	</h2>
 	<br>
