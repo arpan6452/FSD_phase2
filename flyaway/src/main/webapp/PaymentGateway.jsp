@@ -196,7 +196,7 @@ span.price {
       <p><a href="#">Price</a> <span class="price">&#8377;<%= price %></span></p>
       
       <p><a href="#">GST</a> <span class="price">&#8377;<%=gst %></span></p>
-      <p><a href="#">SGST</a> <span class="price">&#8377;<%=gst %></span></p>      
+      <p><a href="#">SGST</a> <span class="price">&#8377;<%=sgst %></span></p>      
       <hr>
       <p>Total <span class="price" style="color:black"><b>&#8377;<%= total %></b></span></p>
     </div>

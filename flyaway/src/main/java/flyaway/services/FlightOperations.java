@@ -31,7 +31,7 @@ public class FlightOperations {
 		flightTravelDetails1.setSource("Bangalore");
 		flightTravelDetails1.setDestinaion("Chennai");
 		allFlightTravelDetails.add(flightTravelDetails1);
-		flightOperations.createAFlight("JetAirways", "JA0932", 5400, allFlightTravelDetails);
+		flightOperations.createAFlight("Vistara", "V09I32", 4500, allFlightTravelDetails);
 		//flightOperations.getAllFlights();
 
 		FlightOperations flightOperations1 = new FlightOperations();
