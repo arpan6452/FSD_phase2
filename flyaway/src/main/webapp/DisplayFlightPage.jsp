@@ -1,5 +1,7 @@
+<%@page import="flyaway.model.FlightTravelDetails"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="flyaway.services.FlightOperations,flyaway.model.Flight, java.util.List, java.util.Iterator, flyaway.utils.Util" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,52 +60,55 @@
 	text-decoration: none;
 	display: inline-block;
 	font-size: 15px;
-	margin: 4px 2px;
+	margin: 18px 2px;
 	cursor: pointer;
 	background-color: #3f51b5;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
 	border: none;
 	border: none;
 }
-	
-.backButton {
-	float: right;
-	border: none;
-	color: white;
-	padding: 17px 34px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 15px;
-	/* margin: 4px 2px; */
-	cursor: pointer;
-	background-color: #3f51b5;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
-	border: none;
-	border: none;
-	margin: 20px;
-}
+
 </style>
 </head>
 	<body>
-		<button class="backButton" type="button" onclick="location.href='HomePage.jsp'">Back</button>
-		<% for(int flightLoop =0;flightLoop<20;flightLoop++){ %>
+	<jsp:include page="TopNav.jsp" />
+<br>
+		<% 
+		Util util = new Util();
+		String source = request.getParameter("source");
+		String destination = request.getParameter("destination");
+		String departureDate = request.getParameter("departureDate");
+		System.out.print(source + " and " + destination + " and " + departureDate); 
+		FlightOperations flightOperations = new FlightOperations();
+		List flights = flightOperations.searchFlights(source, destination, departureDate);
+		if(flights.size()>0){
+		for (Iterator iterator = flights.iterator(); iterator.hasNext();){ 
+			FlightTravelDetails flightTravelDetails = (FlightTravelDetails) iterator.next(); 	
+			String timeDiff = util.dateTimeDifference(flightTravelDetails.getArrivalTime(), flightTravelDetails.getDepartureTime());
+		%>
 		<div class="card">
 			<div class="container">
 				<ul class="nav">
-				<form method="post" action="FlightDetails">
+				<form action="AuthenticationServlet" method="post">
 					<img src="./images/flightImg.png" alt="Avatar" class="avatar">
-					<li><input type="hidden" name="flightName" value="Airasia">FlightName</li>
-					<li style="color: #878787;"><input type="hidden" name="start" value="Kolkata">Start</li>
-					<li><input type="hidden" name="duration" value="2hrs">time Duration</li>
-					<li style="color: #878787;"><input type="hidden"name="destination" value="Bangalore">Stop</li>
-					<li><input type="hidden" name="price" value="12.00"><b> &#8377;20.00</b></li>
+					<li>
+						<input type="hidden" name="flightName" value="<%= flightTravelDetails.getFlight().getFlightName() %>"><%= flightTravelDetails.getFlight().getFlightName() %>
+						<br>
+						<input type="hidden" name="flightCode" value="<%= flightTravelDetails.getFlight().getFlightCode() %>"><span style="font-size: 10px;color: #3f51b5;"><%= flightTravelDetails.getFlight().getFlightCode()  %></span>
+					</li>
+					<li style="color: #878787;"><input type="hidden" name="departure" value="<%= flightTravelDetails.getSource() %>"><%= flightTravelDetails.getSource() %></li>
+					<li><input type="hidden" name="duration" value="<%= timeDiff%>"><%=timeDiff %></li>
+					<li style="color: #878787;"><input type="hidden"name="arrival" value="<%= flightTravelDetails.getDestinaion() %>"><%= flightTravelDetails.getDestinaion() %></li>
+					<li><input type="hidden" name="price" value="<%= flightTravelDetails.getFlight().getPrice() %>"><b> &#8377;<%= flightTravelDetails.getFlight().getPrice()  %></b></li>
 					<button class="bookNowButton" type="submit">Book Now</button>
 				</form>
 					
 				</ul>
 			</div>
 		</div>
+		<%}
+		} else{%>
+		<p>No result found!!</p>
 		<%} %>
 	</body>
 </html>

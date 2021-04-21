@@ -1,18 +1,22 @@
+<%@page import="flyaway.model.FlightTravelDetails"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="flyaway.services.FlightOperations,flyaway.model.Flight, java.util.List, java.util.Iterator" %>
+	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <style type="text/css">
-body{
+body {
 	background-image: url("./images/flyaway.jpg");
-  	height: 500px; 
-  	background-position: center; 
-  	background-repeat: no-repeat; 
-  	background-size: cover; 
+	height: 500px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
+
 .logo {
 	margin-left: 2%;
 	margin-top: 3%;
@@ -26,7 +30,7 @@ body{
 
 .searchPanel {
 	height: 200px;
-	background-color: rgba(255,255,255,.6);
+	background-color: rgba(255, 255, 255, .6);
 	width: 80%;
 	margin-left: 8%;
 	margin-top: 5%;
@@ -89,7 +93,7 @@ body{
 	z-index: 1;
 }
 
-.dropdown-content a {	
+.dropdown-content a {
 	color: black;
 	padding: 12px 16px;
 	text-decoration: none;
@@ -113,79 +117,69 @@ body{
 	background: #2980B9;
 }
 </style>
-<script type="text/javascript">
-	function showHide(className) {
-		document.getElementById(className).classList.toggle("show");
-	}
-
-	// Close the dropdown if the user clicks outside of it
-	window.onclick = function(event) {
-		if (!event.target.matches('.dropbtn')) {
-			var dropdowns = document.getElementsByClassName("dropdown-content");
-			var i;
-			for (i = 0; i < dropdowns.length; i++) {
-				var openDropdown = dropdowns[i];
-				if (openDropdown.classList.contains('show')) {
-					openDropdown.classList.remove('show');
-				}
-			}
-		}
-	}
-</script>
 </head>
 <body>
+<jsp:include page="TopNav.jsp" />
+<br>
 	<h2 class="logo">
 		<img src="./images/flightImg.png" alt="Avatar" class="avatar">
 		Welcome to Flyaway
 	</h2>
-	<br><br><br><br><br><br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<div class="searchPanel">
-	<br><br>
-		<div class="dropdown">
-			<button onclick="showHide('sourceDropdown')"
-				class="serachFlightSection dropbtn">Source</button>			
-			<div id="sourceDropdown" class="dropdown-content">
-				<a href="#home">Home</a> 
-				<a href="#about">About</a> 
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-			</div>
-		</div>
-		<img src="./images/arrow.png" alt="Avatar" class="avatar">
-		<div class="dropdown">
-			<button onclick="showHide('destDropdown')"
-				class="serachFlightSection dropbtn">Destination</button>			
-			<div id="destDropdown" class="dropdown-content">				
-				<a href="#home">Home</a> 
-				<a href="#about">About</a> 
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-				<a href="#contact">Contact</a>
-			</div>
-		</div>
-		<span style="font-size:17px; margin-left: 40px; color: #555;">Source</span>
-		<input class="serachFlightSection travelDate" type="date" name="startDate"> 
-		<span style="font-size:17px; margin-left: 20px; color: #555;">Departure</span>
-		<input class="serachFlightSection travelDate" type="date" name="endDate">
-
 		<br>
 		<br>
-		<button class="serachFlightSection searchButton" type="button">Search</button>
+		<form action="DisplayFlightPage.jsp" method="post">
+			<%
+			FlightOperations flightOperations = new FlightOperations();
+			List flightTravelDetailsList = flightOperations.getAllFlightsDetails();
+			FlightTravelDetails flightTravelDetails = null;
+			%>
+			
+			
+			<div class="dropdown">
+				<select class="serachFlightSection dropbtn" name="source" id="source">
+					<% String allSource = "";
+					for (Iterator iterator = flightTravelDetailsList.iterator(); iterator.hasNext();) {
+						flightTravelDetails = (FlightTravelDetails) iterator.next();
+						if(!(allSource.contains(flightTravelDetails.getSource()))){
+						
+					%>
+					<option value="<%= flightTravelDetails.getSource() %>"><%= flightTravelDetails.getSource() %></option>		
+					<%
+						}
+					allSource = allSource + flightTravelDetails.getSource();
+					}
+					%>			
+				</select>
+			</div>
+			<img src="./images/arrow.png" alt="Avatar" class="avatar" style="width: 30px;height: 30px;">
+			<div class="dropdown">
+				<select class="serachFlightSection dropbtn" name="destination"
+					id="destination">
+					<% String allDestination = "";
+					for (Iterator iterator = flightTravelDetailsList.iterator(); iterator.hasNext();) {
+						flightTravelDetails = (FlightTravelDetails) iterator.next();
+						if(!(allDestination.contains(flightTravelDetails.getDestinaion()))){
+					%>
+					<option value="<%= flightTravelDetails.getDestinaion() %>"><%= flightTravelDetails.getDestinaion() %></option>		
+					<%
+						}
+						allDestination = allDestination + flightTravelDetails.getDestinaion();
+					}
+					%>	
+				</select>
+			</div>
+			<span style="font-size: 17px; margin-left: 40px; color: #555;">Departure</span>
+			<input class="serachFlightSection travelDate" type="date"
+				name="departureDate" required> <br> <br>
+			<button class="serachFlightSection searchButton" type="submit">Search</button>			
+		</form>
 	</div>
 
 </body>

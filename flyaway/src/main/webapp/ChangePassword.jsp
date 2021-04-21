@@ -20,7 +20,7 @@ input[type=text], input[type=password] {
   background: #f1f1f1;
 }
 
-button {
+.submitButton {
 	background-color: #3f51b5;
 	color: white;
 	padding: 14px 20px;
@@ -84,7 +84,9 @@ hr {
 </script>
 </head>
 <body>
-<form action="ChangePasswordServlet" method="post" >
+<jsp:include page="TopNav.jsp" />
+<br>
+<form action="ChangePassword" method="post" >
 		<div class="container">
 			<h2>Change Password</h2>
 			<hr>   
@@ -95,7 +97,7 @@ hr {
 				<label for="psw"><b>Re New Password</b></label> 
 				<input type="password" placeholder="Enter New Password" name="renewPass" required>
 			<hr>  
-			<button type="submit" onclick="">Submit</button> 
+			<button class="submitButton" type="submit" >Submit</button> 
 		</div>
 	</form>
 </body>

@@ -1,6 +1,8 @@
-package flyaway;
+package flyaway.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,22 +18,20 @@ public class FlightDetails extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
+			
 			String flightName = request.getParameter("flightName");
 			String start = request.getParameter("start");
 			String duration = request.getParameter("duration");
 			String destination = request.getParameter("destination");
 			String price = request.getParameter("price");
+			RequestDispatcher reqestDispatcher = request.getRequestDispatcher("FlightDetails.jsp");
+			reqestDispatcher.forward(request, response);
 		} catch (Exception e) {
+			response.sendRedirect("/flyaway/ErrorPage.jsp");
 		}
-		response.getWriter().println(flightName + start + duration + destination + price);
 	}
 
 }

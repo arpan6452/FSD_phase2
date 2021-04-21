@@ -23,7 +23,7 @@ body {
 }
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type=text], input[type=password], select {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -70,10 +70,15 @@ a {
   text-align: center;
 }
 </style>
+<script type="text/javascript">
+function onSubmitClick() {
+	
+}
+</script>
 </head>
 <body>
 
-<form action="/action_page.php">
+<form action="RegistrationServlet" method="post">
   <div class="container">
     <h2>Register</h2>
     <p>Please fill in this form to create an account.</p>
@@ -81,14 +86,26 @@ a {
 
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" id="email" required>
+    
+    <label for="firstName"><b>FirstName</b></label>
+    <input type="text" placeholder="Enter FirstName" name="firstName" id="firstName" required>
+    
+    <label for="lastName"><b>LastName</b></label>
+    <input type="text" placeholder="Enter LastName" name="lastName" id="lastName" required>
+    
+    <label for="role"><b>Role(Admin/User)</b></label>
+    <select name="role" id="role" required>
+		<option value="Admin">Admin</option>
+		<option value="User">User</option>
+	</select>    
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" id="password" required>
 
     <label for="psw-repeat"><b>Repeat Password</b></label>
     <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
     <hr>    
-
+	
     <button type="submit" class="registerbtn">Register</button>
   </div>
   
